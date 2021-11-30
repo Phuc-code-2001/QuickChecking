@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
+{% block render_body %}
+
+<link rel="stylesheet" href="{% static 'home/css/login.css' %}">
+
+<section class="main_login">
+
+    <h1 class="login_title">Login</h1>
+    <hr class="my-0">
+    <form action="" method="post" class="auth_form">
+        
+        
+
+    </form>
+    <div class="social_auth_group">
+        <a class="social_auth_item" href="{% provider_login_url 'google' %}">
+            <img class="social_auth_logo" src="https://res.cloudinary.com/demo/image/fetch/fl_png8/https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="">
+        </a>
+        <a class="social_auth_item" href="{% provider_login_url 'google' %}">
+            <img class="social_auth_logo" src="https://res.cloudinary.com/demo/image/fetch/fl_png8/https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="">
+        </a>
+        
+    </div>
+</section>
+
+{% endblock render_body %}

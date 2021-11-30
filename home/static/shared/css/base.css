@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    background-color: #F7F7F7;
+}
+
+main {
+    overflow: auto;
+}
+
+.page_control {
+    height: 100%;
+    width: 100%;
+    max-width: 250px;
+    background-image: linear-gradient(135deg, #2E4C6D, #396EB0);
+    box-shadow: 0 10px 10px 1px #2E4C6D;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+header, main {
+    flex: 1;
+    padding: 2rem;
+    position: relative;
+}
+
+.header_title {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.section_title {
+    color: darkcyan;
+}
+
+.header_title .title {
+    font-weight: bold;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.list-group {
+    font-size: 1.5rem;
+    border-radius: 0;
+}
+
+.list-group-item {
+    padding: 0;
+}
+
+.list-group-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.list-group-link:hover {
+    text-decoration: none;
+}
+
+.list-group-link:hover:not(.active) {
+    background-color: snow;
+    font-weight: 600;
+}
+
+.active {
+    background-color: #DADDFC;
+    font-weight: 600;
+}
+
+.text-gradient {
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient( to right,  red, blue, yellow, blue);
+}
+
+footer {
+    background-color: brown;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: .5rem;
+}
+
+.header_index {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.control_toggle_button {
+    font-size: 1.5rem;
+    padding: .8rem;
+    box-shadow: .2rem .2rem .5rem .1rem #FFBC97;
+    outline: none;
+    border: 1px solid #DADDFC;
+    background-color: transparent;
+    color: #009DAE;
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .control_toggle_button {
+        display: inline-flex;
+    }
+
+    .page_control {
+        position: absolute;
+        max-width: 100%;
+        z-index: 99;
+        transition: .5s ease-in-out;
+        transform: translateX(-100%);
+    }
+
+    .header_title .title {
+        margin-right: auto;
+        font-size: 1.8rem;
+    }
+
+}

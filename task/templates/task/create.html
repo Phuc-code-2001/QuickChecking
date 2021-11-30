@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block render_body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'task/css/create.css' %}">
+
+<div class="top_section">
+    <h1 class="section_title">{{ title }}</h1>
+    <hr>
+</div>
+
+<section class="main_task_create">
+    <form action="{% url 'task_create' %}" method="post" class="task_form" autocomplete="off">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="btn-control">
+            <a href="{% url 'home' %}" class="btn btn-danger">Back</a>
+            <input type="submit" value="Confirm" class="btn btn-outline-success">
+        </div>
+    </form>
+</section>
+
+{% endblock render_body %}

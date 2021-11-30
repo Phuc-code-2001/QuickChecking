@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block render_body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'task/css/index.css' %}">
+
+<section class="top_section">
+    
+    <h1 class="section_title">{{ title }}</h1>
+    <hr>
+    <div class="taskbar">
+        <a href="{% url 'home' %}" class="_link bg_home">
+            <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+            </span>
+            <b class="link_text">Home</b>
+        </a>
+        <a href="{% url 'task_join' %}" class="_link bg_join">
+            <div class="icon">
+                <ion-icon name="add-circle-outline"></ion-icon>
+            </div>
+            <b>Join</b>
+        </a>
+        <a href="{% url 'task_create' %}" class="_link bg_create">
+            <span class="icon">
+                <ion-icon name="videocam-outline"></ion-icon>
+            </span>
+            <b class="link_text">New task</b>
+        </a>
+    </div>
+</section>
+{% block main_task_index %}
+
+<section class="main_task_index">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 search_box __br">
+            <form action="." autocomplete="off">
+                <input type="search" name="q" placeholder="Search in your tasks" class="search form-control">
+                <input type="submit" value="Search" class="btn btn-info search">
+                <span class="help_text text-info">
+                    Find any name or key contains your given.
+                </span>
+            </form>
+            <hr>
+            {% if page_obj.paginator.num_pages > 1 %}
+            <div class="pagination">
+                <span class="page_current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                <span class="pagination_bar">
+                    <a href="?page=1" class="pagination_link page_link_fl">&laquo;</a>
+
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="pagination_link">{{ page_obj.previous_page_number }}</a>
+                    {% endif %}
+            
+                    <a href="?page={{ page_obj.number }}" class="pagination_link page_link_active">{{ page_obj.number }}</a>
+                    
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="pagination_link">{{ page_obj.next_page_number }}</a>
+                    {% endif %}
+
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination_link page_link_fl">&raquo;</a>
+                </span>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-8 col-md-6 task_list">
+            {% if not tasks %}
+            <p class="text-danger">No have any task.</p>
+            {% endif %}
+            {% for item in tasks %}
+            <ul class="task_item list-group">
+                <li class="list-group-item">
+                    <b>Name:</b>
+                    <a href="{% url 'task_detail' item.id %}" class="task_link">{{ item.name }}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Key:</b>
+                    <span>{{ item.key }}</span>
+                </li>
+                <li class="list-group-item">
+                    <b>Date of created:</b>
+                    <span>{{ item.date_of_created|date:'Y-m-d H:i' }}</span>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock main_task_index %}
+
+{% endblock render_body %}

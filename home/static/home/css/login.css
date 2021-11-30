@@ -1,0 +1,75 @@
+
+.main_login {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    overflow: visible;
+    background-color: var(--primary);
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-70%);
+}
+
+.main_login * {
+    overflow: visible;
+}
+
+.login_title {
+    font-family: monospace;
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+}
+
+hr {
+    border-top: 1px solid white;
+}
+
+@media only screen and (max-width: 600px) {
+    .main_login {
+        background-color: transparent;
+        gap: 2rem;
+        position: absolute;
+        left: 0;
+        right: 0;
+        transform: translateY(-80%);
+    }
+
+    .login_title {
+        color: var(--primary);
+        text-align: left;
+    }
+
+    hr {
+        border-top: 1px solid rgba(0, 0, 255, .2);
+    }
+}
+
+.social_auth_group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.social_auth_item {
+    flex: 1;
+    min-width: 195px;
+    padding: .5rem;
+    text-align: center;
+    border: 1px double cadetblue;
+    background-color: white;
+}
+
+.social_auth_item:hover {
+    box-shadow: 5px 5px 10px 1px #D47AE8;
+}
+
+.social_auth_logo {
+    width: 6.5rem;
+    object-fit: contain;
+}

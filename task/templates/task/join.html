@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block render_body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'task/css/join.css' %}">
+<script src="{% static 'task/js/join.js' %}"></script>
+
+<section class="top_section">
+    
+    <h1 class="section_title">{{ title }}</h1>
+    <hr>
+    <div class="taskbar">
+        <a href="{% url 'home' %}" class="_link bg_home">
+            <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+            </span>
+            <b class="link_text">Home</b>
+        </a>
+        <a href="" class="_link bg_join">
+            <div class="icon">
+                <ion-icon name="add-circle-outline"></ion-icon>
+            </div>
+            <b>Join</b>
+        </a>
+        <a href="{% url 'task_create' %}" class="_link bg_create">
+            <span class="icon">
+                <ion-icon name="videocam-outline"></ion-icon>
+            </span>
+            <b class="link_text">New task</b>
+        </a>
+    </div>
+</section>
+
+<section class="main_task_join">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 search_box __br">
+            <form action="" method="POST" autocomplete="off" id="join_form">
+                {% csrf_token %}
+                <input type="search" name="q" placeholder="Enter a key" class="search form-control" value="{{ request.POST.q }}">
+                <input type="submit" value="Search" class="btn btn-info search">
+            </form>
+        </div>
+        <div class="col-lg-8 col-md-6 result_list">
+            <h2 class="section_title">Search result</h2>
+            <hr>
+            <a id="item_link" href="" class="text-decoration-none text-dark item_result">
+                <table class="table table-bordered bg-white">
+                    <tbody>
+                        <tr>
+                            <th>Owner</th>
+                            <td id="owner"></td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td id="name"></td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td id="date_opening"></td>
+                        </tr>
+                        <tr>
+                            <th>StartTime</th>
+                            <td id="start_time"></td>
+                        </tr>
+                        <tr>
+                            <th>EndTime</th>
+                            <td id="end_time"></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </a>
+            <p class="null_result"></p>
+        </div>
+    </div>
+</section>
+
+{% endblock render_body %}

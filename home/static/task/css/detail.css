@@ -1,0 +1,100 @@
+.top_section {
+    padding: 1rem 0;
+}
+
+.task_info_box {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    background-color: var(--info);
+    gap: 1px;
+    max-width: 725px;
+    width: 100%;
+    width: fit-content;
+    overflow: auto;
+    border: 1px solid gold;
+}
+
+.task_field_group {
+    flex: 1;
+    min-width: fit-content;
+    padding: 1rem;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFEA9;
+}
+
+.task_field_group > label {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.task_field_group > p {
+    font-family: sans-serif;
+}
+
+.check_box {
+    margin-top: 1rem;
+}
+
+.second_title {
+    color: var(--success);
+}
+
+.member_list_box {
+    font-size: 14px;
+    border-right: 1px solid rgba(0,0,0,.1);
+    padding-top: 1rem;
+    padding-right: 1rem;
+    overflow: auto;
+}
+
+.flex_box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.control_box {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+
+.control_box * {
+    font-size: 14px;
+}
+
+.flex_box > * {
+    flex: 1;
+    min-width: min(300px, 100%);
+}
+
+#btn_enroll {
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.scroll {
+    overflow: auto;
+}
+
+.success_message, .error_message {
+    padding: .5rem;
+    font-size: 14px;
+    font-weight: bold;
+    border-top: 1px solid white;
+}
+
+.success_message {
+    background-color: var(--success);
+    color: white;
+}
+
+.error_message {
+    background-color: var(--red);
+    color: white;
+}

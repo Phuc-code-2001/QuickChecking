@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block render_body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+
+{% if user.first_name or user.last_name %}
+<h1 class="text_username text-gradient">Hello, {{ user.first_name }} {{ user.last_name }}</h1>
+{% else %}
+<h1 class="text_username text-gradient">Hello, {{ user }}</h1>
+{% endif %}
+
+<section class="main_index">
+    <div class="flex_box">
+        <section class="flex_item">
+            <a href="{% url 'task_create' %}" class="flex_link meet_new">
+                <span class="flex_icon">
+                    <ion-icon name="videocam-outline"></ion-icon>
+                </span>
+                <b>New task</b>
+            </a>
+        </section>
+        <section class="flex_item">
+            <a href="{% url 'task_join' %}" class="flex_link meet_join">
+                <div class="flex_icon">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                </div>
+                <b>Join</b>
+            </a>
+        </section>
+        <section class="flex_item">
+            <a href="{% url 'task' %}" class="flex_link meet_history">
+                <div class="flex_icon">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                </div>
+                <b>Your tasks</b>
+            </a>
+        </section>
+        <section class="flex_item">
+            <a href="" class="flex_link meet_about">
+                <div class="flex_icon">
+                    <ion-icon name="alert-circle-outline"></ion-icon>
+                </div>
+                <b>About us</b>
+            </a>
+        </section>
+    </div>
+</section>
+
+{% endblock render_body %}
+
+{% block scripts_link %}
+
+{% endblock scripts_link %}

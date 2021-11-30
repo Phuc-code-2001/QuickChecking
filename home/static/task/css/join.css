@@ -1,0 +1,41 @@
+@import url("index.css");
+
+.main_task_join {
+    background-color: #FFFEA9;
+    padding: 15px;
+}
+
+.result_list {
+    padding: 1rem;
+}
+
+.main_task_join form {
+    padding: 1rem;
+    align-items: flex-end;
+    background-color: white;
+}
+
+.main_task_join .form-control {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+
+.item_result {
+    font-size: 14px;
+    display: block;
+    overflow: auto;
+}
+
+.item_result table th {
+    width: 100px;
+}
+
+.table:hover {
+    box-shadow: 5px 5px 10px 1px rgb(26, 108, 218);
+}
+
+.null_result {
+    font-size: 18px;
+    color: var(--danger);
+    text-align: center;
+}

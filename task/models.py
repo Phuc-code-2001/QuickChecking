@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+from django.utils import timezone
 
 # Create your models here.
 class Task(models.Model):
@@ -8,10 +9,10 @@ class Task(models.Model):
     key             = models.CharField(max_length=24)
     name            = models.CharField(max_length=100)
     password        = models.CharField(max_length=24)
-    date_of_created = models.DateTimeField(default=datetime.datetime.now())
-    date_opening    = models.DateField(default=datetime.datetime.now())
-    start_time      = models.TimeField(default=datetime.datetime.now().time())
-    end_time        = models.TimeField(default=datetime.datetime.now().time())
+    date_of_created = models.DateTimeField(auto_now_add=True)
+    date_opening    = models.DateField()
+    start_time      = models.TimeField()
+    end_time        = models.TimeField()
 
     def __str__(self):
         return self.name
@@ -23,7 +24,7 @@ class Task(models.Model):
 class Check(models.Model):
     task            = models.ForeignKey(Task, on_delete=models.CASCADE)
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
-    time_checked    = models.DateTimeField(default=datetime.datetime.now())
+    time_checked    = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):

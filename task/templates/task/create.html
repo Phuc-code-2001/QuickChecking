@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block render_body %}
 {% load static %}
+{% load tz %}
 <link rel="stylesheet" href="{% static 'task/css/create.css' %}">
 
 <div class="top_section">
@@ -9,6 +10,7 @@
 </div>
 
 <section class="main_task_create">
+    
     <form action="{% url 'task_create' %}" method="post" class="task_form" autocomplete="off">
         {% csrf_token %}
         {{ form.as_p }}
@@ -17,6 +19,7 @@
             <input type="submit" value="Confirm" class="btn btn-outline-success">
         </div>
     </form>
+    
 </section>
 
 {% endblock render_body %}

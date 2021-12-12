@@ -1,8 +1,14 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.db.models import fields
+from django.utils import timezone
+from django.conf import settings
+
+from django.conf import settings
 from .models import Task
-import secrets, datetime
+
+import pytz
+
+SERVER_TZ = pytz.timezone(settings.TIME_ZONE)
         
 class TaskForm(forms.ModelForm):
 
@@ -17,7 +23,7 @@ class TaskForm(forms.ModelForm):
         fields = ['name', 'password', 'confirm', 'date_opening', 'start_time', 'end_time']
 
     def clean_date_opening(self):
-        if self.cleaned_data['date_opening'] >= datetime.datetime.today().date():
+        if self.cleaned_data['date_opening'] >= timezone.now().astimezone(SERVER_TZ).date():
             return self.cleaned_data['date_opening']
         raise ValidationError("Date opening must be equal or after today.")
 

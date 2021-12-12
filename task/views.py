@@ -1,14 +1,16 @@
 from django.http.response import HttpResponseNotFound, JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.utils.timezone import now
+from django.utils import timezone
+from django.conf import settings
 
 from .forms import TaskForm
 from .models import Check, Task
 from .generic import TaskListView
 
-import secrets, datetime
+import secrets, pytz
+
+SERVER_TZ = pytz.timezone(settings.TIME_ZONE)
 
 # Create your views here.
 @login_required
@@ -18,22 +20,32 @@ def index(request):
 
 @login_required
 def create(request):
-    
+
+    timezone.activate(SERVER_TZ)
+
     if request.method == 'GET':
-        form = TaskForm(
-            instance=Task()
-        )
+        
+        new_task = Task()
+        now = timezone.now()
+        new_task.date_opening = now.astimezone(SERVER_TZ).date()
+        new_task.start_time   = now.astimezone(SERVER_TZ).time().replace(second=0)
+        new_task.end_time     = now.astimezone(SERVER_TZ).time().replace(second=0)
+
+        form = TaskForm(instance=new_task)
         context = {
             'title': 'Task - Create',
             'task_active': 'active',
             'form': form,
         }
+
         return render(request, 'task/create.html', context)
     
     if request.method == 'POST':
+
         form = TaskForm(request.POST)
 
         if form.is_valid():
+
             request.user.task_set.create(
                 name         = form.cleaned_data['name'],
                 key          = secrets.token_urlsafe(16),
@@ -42,6 +54,7 @@ def create(request):
                 start_time   = form.cleaned_data['start_time'],
                 end_time     = form.cleaned_data['end_time']
             )
+
             return redirect('task')
 
         context = {
@@ -127,11 +140,11 @@ def check(request, task_id):
     if pwd != task.password:
         return redirect('task_detail', id=task_id)
 
-    if datetime.datetime.now().date() != task.date_opening \
-    or not task.start_time <= datetime.datetime.now().time() <= task.end_time:
+    if timezone.now().astimezone(SERVER_TZ).date() != task.date_opening \
+    or not task.start_time <= timezone.now().astimezone(SERVER_TZ).time() <= task.end_time:
 
         return HttpResponse("Time out.", status=405)
     
-    Check.objects.create(task=task, user=user, time_checked=datetime.datetime.now())
+    Check.objects.create(task=task, user=user)
 
     return HttpResponse("Enroll successfully.")

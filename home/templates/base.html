@@ -16,7 +16,7 @@
     <section class="page_control">
         <header>
             <div class="header_title">
-                <h1 class="title">Online Attendance</h1>
+                <h1 class="title">QuickCheck Online</h1>
                 <button class="control_toggle_button">
                     <ion-icon name="arrow-back-outline"></ion-icon>
                 </button>
@@ -33,14 +33,20 @@
                         <a class="list-group-link {{ task_active }}" href="{% url 'task' %}">Your tasks</a>
                     </li>
                     <li class="list-group-item">
+                        <a class="list-group-link {{ about_active }}" href="">About Us</a>
+                    </li>
+                    <li class="list-group-item">
                         <a class="list-group-link" href="{% url 'logout' %}">Sign out</a>
                     </li>
                 {% else %}
                     <li class="list-group-item">
                         <a class="list-group-link {{ login_active }}" href="{% url 'login' %}">Login</a>
                     </li>
-                    <li class="list-group-item">
+                    <!-- <li class="list-group-item">
                         <a class="list-group-link {{ register_active }}" href="">Register</a>
+                    </li> -->
+                    <li class="list-group-item">
+                        <a class="list-group-link {{ about_active }}" href="">About Us</a>
                     </li>
                 {% endif %}
             </ul>

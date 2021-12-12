@@ -54,6 +54,7 @@ hr {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    min-width: 250px;
 }
 
 .social_auth_item {

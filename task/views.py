@@ -10,6 +10,8 @@ from .generic import TaskListView
 
 import secrets, pytz
 
+import xlwt
+
 SERVER_TZ = pytz.timezone(settings.TIME_ZONE)
 
 # Create your views here.
@@ -64,6 +66,7 @@ def create(request):
         }
         return render(request, 'task/create.html', context)
 
+@login_required
 def join(request):
 
     if request.method == 'POST':
@@ -89,6 +92,7 @@ def join(request):
 
     return render(request, 'task/join.html', context)
 
+@login_required
 def detail(request, id):
 
     context = {
@@ -120,11 +124,11 @@ def detail(request, id):
 
     return render(request, 'task/detail.html', context)
 
-
+@login_required
 def enter_password(request, context):
     return render(request, 'task/password.html', context)
 
-
+@login_required
 def check(request, task_id):
 
     user = request.user
@@ -148,3 +152,46 @@ def check(request, task_id):
     Check.objects.create(task=task, user=user)
 
     return HttpResponse("Enroll successfully.")
+
+@login_required
+def export_task_xls(request, task_id):
+
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="unknown.xls"'
+
+    task = Task.objects.filter(id=task_id).first()
+    if task:
+        response['Content-Disposition'] = f'attachment; filename="{task.short_name()}.xls"'
+    else:
+        return response
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Enroller')
+
+     # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['No.', 'Name', 'Email', 'Time Checked', ]
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+     # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    objects = Check.objects.filter(task__pk=task_id)
+    rows = []
+    for i, check in enumerate(objects):
+        row = [i + 1, f"{check.user.first_name} {check.user.last_name}", check.user.email, check.time_checked.time().strftime("%H:%M")]
+        rows.append(row)
+
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response

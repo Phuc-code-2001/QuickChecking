@@ -12,31 +12,36 @@
 <div class="main_task_detail">
 
     <div class="check_box">
-        <h2 class="second_title">List of checked members</h2>
+        <h2 class="second_title">
+            <span>List of checked members</span>
+            {% if item.check_set.all %}
+            <a class="btn btn-success" style="font-size: 12px;" href="{% url 'export_task_xls' task_id=item.id %}" download="{{ item.short_name }}">Export Data.</a>
+            {% endif %}
+        </h2>
         <hr>
         <div class="flex_box">
             <div class="member_list_box">
                 {% if item.check_set.all %}
-                    <table class="table table-bordered table-stripped">
-                        <thead class="bg-white text-secondary">
-                            <tr>
-                                <th>No.</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Time Checked</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for enroller in item.check_set.all %}
-                            <tr>
-                                <td>{{ forloop.counter }}</td>
-                                <td>{{ enroller.user.first_name }} {{ enroller.user.last_name }}</td>
-                                <td>{{ enroller.user.email }}</td>
-                                <td>{{ enroller.time_checked|date:'H:i' }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <table class="table table-bordered bg-white text-center">
+                    <thead class="bg-info text-white">
+                        <tr>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Time Checked</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enroller in item.check_set.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ enroller.user.first_name }} {{ enroller.user.last_name }}</td>
+                            <td>{{ enroller.user.email }}</td>
+                            <td>{{ enroller.time_checked|date:'H:i' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 {% else %}
                 <div style="padding: 0 2rem;">
                     <p class="error_message">No have any member.</p>

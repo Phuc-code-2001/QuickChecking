@@ -13,5 +13,5 @@ urlpatterns = [
     path('', include('home.urls')),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view(), name='logout'),
-    path('task/', include('task.urls'))
+    path('task/', include('task.urls')),
 ]

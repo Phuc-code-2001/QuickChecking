@@ -1,0 +1,28 @@
+
+
+.top_section {
+    padding: 1rem 0;
+}
+
+.content_title {
+    font-weight: bold;
+    color: var(--info);
+}
+
+.container > section {
+    margin: 1rem auto;
+}
+
+.content {
+    padding: 1rem 2rem;
+    border-top: 1px double var(--info);
+}
+
+.fz {
+    font-size: 1.6rem !important;
+}
+
+.text_important {
+    color: var(--primary);
+    font-weight: bold;
+}

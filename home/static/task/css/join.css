@@ -24,18 +24,19 @@
     font-size: 14px;
     display: block;
     overflow: auto;
+    max-width: 400px;
 }
 
 .item_result table th {
     width: 100px;
 }
 
-.table:hover {
-    box-shadow: 5px 5px 10px 1px rgb(26, 108, 218);
-}
-
 .null_result {
     font-size: 18px;
     color: var(--danger);
     text-align: center;
+}
+
+#item_link {
+    font-size: 1.6rem;
 }

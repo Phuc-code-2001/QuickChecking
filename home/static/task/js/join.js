@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $("#item_link").hide();
+    $(".item_result").hide();
     $(".null_result").hide();
 
     $("#join_form").submit(function(e){
@@ -21,13 +21,13 @@ $(document).ready(function(){
                 $("#date_opening").text(result.date_opening);
                 $("#start_time").text(result.start_time);
                 $("#end_time").text(result.end_time);
-                $("#item_link").show();
+                $(".item_result").show();
                 $(".null_result").hide();
             },
             error: function(result){
                 $(".null_result").text(result.responseText);
                 $(".null_result").show();
-                $("#item_link").hide();
+                $(".item_result").hide();
             }
         });
 

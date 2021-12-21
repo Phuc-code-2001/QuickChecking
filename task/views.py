@@ -1,4 +1,4 @@
-from django.http.response import HttpResponseNotFound, JsonResponse, HttpResponse
+from django.http.response import HttpResponseBadRequest, HttpResponseNotFound, JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -35,7 +35,7 @@ def create(request):
 
         form = TaskForm(instance=new_task)
         context = {
-            'title': 'Task - Create',
+            'title': 'New Task',
             'task_active': 'active',
             'form': form,
         }
@@ -60,7 +60,7 @@ def create(request):
             return redirect('task')
 
         context = {
-            'title': 'Task - Create',
+            'title': 'New Task',
             'task_active': 'active',
             'form': form,
         }
@@ -96,7 +96,7 @@ def join(request):
 def detail(request, id):
 
     context = {
-        'title': 'TaskDetail',
+        'title': 'Task Info',
     }
 
     if request.method == "POST":
@@ -118,6 +118,8 @@ def detail(request, id):
             context['error'] = 'Incorrect password.'
             request.session[f'task_{id}_password'] = None
             return enter_password(request, context)
+    else:
+        context['is_owner'] = True
 
     context['item'] = task
     context['is_enrolled'] = task.check_set.filter(user__pk=request.user.id)
@@ -160,10 +162,10 @@ def export_task_xls(request, task_id):
     response['Content-Disposition'] = 'attachment; filename="unknown.xls"'
 
     task = Task.objects.filter(id=task_id).first()
-    if task:
-        response['Content-Disposition'] = f'attachment; filename="{task.short_name()}.xls"'
+    if task and task.owner.id == request.user.id:
+        response['Content-Disposition'] = f'attachment; filename="{task.key}.xls"'
     else:
-        return response
+        return HttpResponseBadRequest()
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Enroller')
@@ -185,7 +187,8 @@ def export_task_xls(request, task_id):
     objects = Check.objects.filter(task__pk=task_id)
     rows = []
     for i, check in enumerate(objects):
-        row = [i + 1, f"{check.user.first_name} {check.user.last_name}", check.user.email, check.time_checked.time().strftime("%H:%M")]
+        local_time = check.time_checked.astimezone(SERVER_TZ).time().strftime("%H:%M")
+        row = [i + 1, f"{check.user.first_name} {check.user.last_name}", check.user.email, local_time]
         rows.append(row)
 
     for row in rows:

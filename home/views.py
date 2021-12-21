@@ -15,3 +15,6 @@ def login(request):
     context = {'title': 'Login', 'login_active': 'active'}
     return render(request, 'home/login.html', context)
 
+def about(request):
+    context = {'title': 'About', 'about_active': 'active'}
+    return render(request, 'home/about.html', context)

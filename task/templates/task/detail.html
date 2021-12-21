@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{% static 'task/css/detail.css' %}">
 
 <section class="top_section">
-    <h1 class="section_title">Task - Detail</h1>
+    <h1 class="section_title">{{ title }}</h1>
     <hr>
 </section>
 
@@ -14,7 +14,7 @@
     <div class="check_box">
         <h2 class="second_title">
             <span>List of checked members</span>
-            {% if item.check_set.all %}
+            {% if is_owner and item.check_set.all %}
             <a class="btn btn-success" style="font-size: 12px;" href="{% url 'export_task_xls' task_id=item.id %}" download="{{ item.short_name }}">Export Data.</a>
             {% endif %}
         </h2>

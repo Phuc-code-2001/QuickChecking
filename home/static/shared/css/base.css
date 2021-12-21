@@ -50,6 +50,7 @@ header, main {
 
 .section_title {
     color: darkcyan;
+    font-weight: bold;
 }
 
 .header_title .title {

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block render_body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/css/about.css' %}">
+<div class="top_section">
+    <h1 class="section_title">About</h1>
+    <hr>
+</div>
+
+<div class="container">
+
+    <section>
+        <h2 class="content_title">Overview</h2>
+        <p class="content fz">We provide a quick attendance solution in every meeting. It helps to save time and effort of the meeting organizer.</p>
+    </section>
+    <section>
+        <h2 class="content_title">How to use</h2>
+        <div class="content">
+            <h3 class="text-secondary">You are organizer:</h3>
+            <ul class="px-4 fz">
+                <li>1. Select "New task"</li>
+                <li>2. Enter Topic of Meeting, password, set time</li>
+                <li>3. Confirm and copy the key that we generated</li>
+                <li>4. Send the key to participants</li>
+            </ul>
+            <h3 class="text-secondary">You are participant:</h3>
+            <ul class="px-4 fz">
+                <li>1. Select "Join"</li>
+                <li>2. Enter the Key and press "Search"</li>
+                <li>3. Click on result and enter the password</li>
+                <li>4. Check to enroll to take attendance.</li>
+            </ul>
+        </div>
+        
+    </section>
+    <section>
+        <h2 class="content_title"></h2>
+        <p class="content fz text_important text-center">Thanks for using our services. Wish all the best to you.</p>
+    </section>
+
+</div>
+
+{% endblock render_body %}

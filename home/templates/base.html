@@ -33,7 +33,7 @@
                         <a class="list-group-link {{ task_active }}" href="{% url 'task' %}">Your tasks</a>
                     </li>
                     <li class="list-group-item">
-                        <a class="list-group-link {{ about_active }}" href="">About Us</a>
+                        <a class="list-group-link {{ about_active }}" href="{% url 'about' %}">About Us</a>
                     </li>
                     <li class="list-group-item">
                         <a class="list-group-link" href="{% url 'logout' %}">Sign out</a>
@@ -46,7 +46,7 @@
                         <a class="list-group-link {{ register_active }}" href="">Register</a>
                     </li> -->
                     <li class="list-group-item">
-                        <a class="list-group-link {{ about_active }}" href="">About Us</a>
+                        <a class="list-group-link {{ about_active }}" href="{% url 'about' %}">About Us</a>
                     </li>
                 {% endif %}
             </ul>

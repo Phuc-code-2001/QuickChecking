@@ -107,7 +107,7 @@ form .help_text{
 }
 
 .task_item:hover {
-    box-shadow: 2px 2px 5px 2px rgb(26, 108, 218);
+    box-shadow: 0 0 5px 1px var(--primary);
 }
 
 .main_task_index .list-group-item {
@@ -173,4 +173,11 @@ form .help_text{
 .page_link_fl {
     background-color: rgba(0, 0, 128, 0.7);
     color: white;
+}
+
+/* override class close */
+.alert-dismissible .close {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }

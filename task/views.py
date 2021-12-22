@@ -1,4 +1,5 @@
-from django.http.response import HttpResponseBadRequest, HttpResponseNotFound, JsonResponse, HttpResponse
+from django.contrib import messages
+from django.http.response import Http404, HttpResponseBadRequest, HttpResponseNotFound, JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -50,7 +51,7 @@ def create(request):
 
             request.user.task_set.create(
                 name         = form.cleaned_data['name'],
-                key          = secrets.token_urlsafe(16),
+                key          = secrets.token_hex(8),
                 password     = form.cleaned_data['password'],
                 date_opening = form.cleaned_data['date_opening'],
                 start_time   = form.cleaned_data['start_time'],
@@ -129,6 +130,19 @@ def detail(request, id):
 @login_required
 def enter_password(request, context):
     return render(request, 'task/password.html', context)
+
+@login_required
+def delete(request, task_id):
+    if request.method == "GET":
+        task = request.user.task_set.filter(id=task_id).first()
+        if task:
+            task.delete()
+            messages.success(request, f'Task with topic "{task.name}" removed.')
+            return redirect('task')
+        else:
+            return Http404()
+    
+    return HttpResponseBadRequest()
 
 @login_required
 def check(request, task_id):

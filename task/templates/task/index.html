@@ -65,29 +65,57 @@
             </div>
             {% endif %}
         </div>
-        <div class="col-lg-8 col-md-6 task_list">
-            {% if not tasks %}
-            <p class="text-danger">No have any task.</p>
-            {% endif %}
-            {% for item in tasks %}
-            <ul class="task_item list-group">
-                <li class="list-group-item">
-                    <b>Name:</b>
-                    <a href="{% url 'task_detail' item.id %}" class="task_link">{{ item.name }}</a>
-                </li>
-                <li class="list-group-item">
-                    <b>Key:</b>
-                    <span>{{ item.key }}</span>
-                </li>
-                <li class="list-group-item">
-                    <b>Date of created:</b>
-                    <span>{{ item.date_of_created|date:'Y-m-d H:i' }}</span>
-                </li>
-            </ul>
+        <div class="col-lg-8 col-md-6 d-flex flex-column">
+            <div class="task_list">
+                {% if not tasks %}
+                <p class="text-danger">No have any task.</p>
+                {% endif %}
+                {% for item in tasks %}
+                <ul class="task_item list-group">
+                    <li class="list-group-item">
+                        <b>Name:</b>
+                        <a href="{% url 'task_detail' item.id %}" class="task_link">{{ item.name }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Key:</b>
+                        <span>{{ item.key }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Date of created:</b>
+                        <span>{{ item.date_of_created|date:'Y-m-d H:i' }}</span>
+                    </li>
+                    <li class="d-flex flex-column">
+                        <a href="{% url 'task_delete' item.id %}" name="{{ item.name }}" class="btn btn-danger btn_remove" style="font-size: 14px; border-radius: 0; font-weight: bold;">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </a>
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                    style="margin: 1rem; font-size: 14px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>{{ message }}</strong>
+            </div>
             {% endfor %}
+            {% endif %}
         </div>
     </div>
 </section>
+
+<script>
+
+    $(".btn_remove").click(function(e){
+        let topic = $(this).attr('name');
+        let message = `Are you sure delete "${topic}" ?`;
+        if(!confirm(message)){
+            e.preventDefault();
+        }
+    });
+
+</script>
 
 {% endblock main_task_index %}
 

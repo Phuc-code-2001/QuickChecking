@@ -26,7 +26,7 @@ SECRET_KEY = secrets.token_hex(16)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.environ.get('USERNAME') != 'PhucHT' else True
 
-ALLOWED_HOSTS = ["http://quickchecking.herokuapp.com/", "http://127.0.0.1:8000/"]
+ALLOWED_HOSTS = ["http://quickchecking.herokuapp.com/", "http://127.0.0.1:8000/", "https://quickchecking.herokuapp.com/"]
 
 
 # Application definition

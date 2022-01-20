@@ -94,11 +94,13 @@
             </div>
             {% if messages %}
             {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
-                    style="margin: 1rem; font-size: 14px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>{{ message }}</strong>
-            </div>
+            {% if message.tags == 'info' %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                        style="margin: 1rem; font-size: 14px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endif %}
             {% endfor %}
             {% endif %}
         </div>

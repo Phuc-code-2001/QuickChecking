@@ -137,7 +137,7 @@ def delete(request, task_id):
         task = request.user.task_set.filter(id=task_id).first()
         if task:
             task.delete()
-            messages.success(request, f'Task with topic "{task.name}" removed.')
+            messages.info(request, f'Task with topic "{task.name}" removed.')
             return redirect('task')
         else:
             return Http404()

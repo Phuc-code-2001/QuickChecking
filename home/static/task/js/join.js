@@ -25,7 +25,10 @@ $(document).ready(function(){
                 $(".null_result").hide();
             },
             error: function(result){
-                $(".null_result").text(result.responseText);
+                let text = `${result.statusText}. `;
+                if(result.status == 500) text += "Try again after a few seconds."
+                else text += "Please check the key.";
+                $(".null_result").text(text);
                 $(".null_result").show();
                 $(".item_result").hide();
             }

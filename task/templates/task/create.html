@@ -15,8 +15,8 @@
         {% csrf_token %}
         {{ form.as_p }}
         <div class="btn-control">
-            <a href="{% url 'home' %}" class="btn btn-danger">Back</a>
-            <input type="submit" value="Confirm" class="btn btn-outline-success">
+            <a href="{% url 'home' %}" class="btn btn-danger mr-auto">Back</a>
+            <input type="submit" value="Create" class="btn btn-success ml-auto">
         </div>
     </form>
     

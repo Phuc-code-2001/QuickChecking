@@ -35,17 +35,18 @@
 .flex_item {
     flex: 1;
     min-width: 280px;
-    border: 1px solid black;
+    border: 1px solid #eee;
 }
 
 .flex_link {
-    font-family: sans-serif;
     font-weight: bold;
     padding: 3rem 2rem;
     font-size: 2rem;
     color: seashell;
     display: flex;
+    align-items: center;
     gap: 1rem;
+    border-radius: 5px;
 }
 
 .flex_icon {
@@ -83,7 +84,7 @@
 .flex_link:hover, .flex_link:focus {
     text-decoration: none;
     color: seashell;
-    box-shadow: 5px 5px 10px 2px #2E4C6D;
+    box-shadow: 3px 3px 5px 1px #2cccff;
 }
 
 .meet_new {

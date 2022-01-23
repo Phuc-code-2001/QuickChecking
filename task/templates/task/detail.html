@@ -11,16 +11,56 @@
 
 <div class="main_task_detail">
 
-    <div class="check_box">
-        <h2 class="second_title">
-            <span>List of checked members</span>
-            {% if is_owner and item.check_set.all %}
-            <a class="btn btn-success" style="font-size: 12px;" href="{% url 'export_task_xls' task_id=item.id %}" download="{{ item.short_name }}">Export Data.</a>
-            {% endif %}
-        </h2>
-        <hr>
+    
+        
         <div class="flex_box">
+            <div class="control_box">
+                {% if item.owner.id != user.id %}
+                    {% if is_enrolled %}
+                    <div class="success_message">Enrolled</div>
+                    {% else %}  
+                    <button id="btn_enroll" class="btn btn-success">
+                        <span>Click to Take Attendance</span>
+                    </button>
+                    {% endif %}
+                {% endif %}
+                <span id="message"></span>
+                <div class="scroll my-3">
+                    <div class="task_info_box">
+                        <div class="task_field_group">
+                            <label for="">Key</label>
+                            <p>{{ item.key }}</p>
+                        </div>
+                        <div class="task_field_group" style="flex: 2;">
+                            <label for="">Topic</label>
+                            <p>{{ item.name }}</p>
+                        </div>
+                        <div class="task_field_group">
+                            <label for="">Date Opening</label>
+                            <p>{{ item.date_opening|date:'Y-m-d' }}</p>
+                        </div>
+                        <div class="task_field_group">
+                            <label for="">Time</label>
+                            <p>{{ item.start_time|date:'H:i' }} - {{ item.end_time|date:'H:i' }}</p>
+                        </div>
+                        <div class="task_field_group">
+                            <label for="">Owner</label>
+                            <p>{{ item.owner.email }}</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="?quit" class="btn btn-danger">Quit</a>
+            </div>
+
             <div class="member_list_box">
+                <h2 class="second_title">
+                    <span>List of checked members</span>
+                    {% if is_owner and item.check_set.all %}
+                    <a class="btn btn-success" style="font-size: 12px;" href="{% url 'export_task_xls' task_id=item.id %}" download="{{ item.short_name }}">Export Data.</a>
+                    {% endif %}
+                </h2>
+                <hr>
+
                 {% if item.check_set.all %}
                 <table class="table table-bordered bg-white text-center">
                     <thead class="bg-info text-white">
@@ -43,52 +83,13 @@
                     </tbody>
                 </table>
                 {% else %}
-                <div style="padding: 0 2rem;">
-                    <p class="error_message">No have any member.</p>
-                </div>
+
+                <p class="text-center text-danger">No have any member.</p>
                 {% endif %}
             </div>
-            <div class="control_box">
-                {% if item.owner.id != user.id %}
-                    {% if is_enrolled %}
-                    <div class="success_message">Enrolled</div>
-                    {% else %}  
-                    <button id="btn_enroll" class="btn btn-success">Check to enroll</button>
-                    {% endif %}
-                {% endif %}
-                <span id="message"></span>
-                <div class="scroll">
-                    <div class="task_info_box">
-                        <div class="task_field_group">
-                            <label for="">Key</label>
-                            <p>{{ item.key }}</p>
-                        </div>
-                        <div class="task_field_group" style="flex: 2;">
-                            <label for="">Content</label>
-                            <p>{{ item.name }}</p>
-                        </div>
-                        <div class="task_field_group">
-                            <label for="">Date Opening</label>
-                            <p>{{ item.date_opening|date:'Y-m-d' }}</p>
-                        </div>
-                        <div class="task_field_group">
-                            <label for="">Time</label>
-                            <p>{{ item.start_time|date:'H:i' }} - {{ item.end_time|date:'H:i' }}</p>
-                        </div>
-                        <div class="task_field_group">
-                            <label for="">Owner</label>
-                            <p>{{ item.owner.email }}</p>
-                        </div>
-                        <div class="task_field_group">
-                            <label for="">Date created</label>
-                            <p>{{ item.date_of_created|date:'Y-m-d' }}</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="?quit" class="btn btn-danger error_message">Quit</a>
-            </div>
+            
         </div>
-    </div>
+    
 
 </div>
 
@@ -101,11 +102,15 @@
             $.ajax({
                 url: "{% url 'task_enroll' item.id %}",
                 method: "GET",
-                success: function(data){
-                    $("#message").attr('class', 'success_message').text(data);
+                success: function(result){
+                    
+                    $("#message").attr('class', 'success_message').text(result);
                 },
-                error: function(data){
-                    $("#message").attr('class', 'error_message').text(data.responseText);
+                error: function(result){
+                    
+                    let messageDOM = $("#message").attr('class', 'error_message');
+                    if (result.status == 500) messageDOM.text(`${result.statusText}. `);
+                    else messageDOM.text(`${result.responseText}`);
                 }
             })
 

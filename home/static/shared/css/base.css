@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,500;0,600;1,100;1,200;1,300;1,500;1,600&display=swap');
 
 html {
     font-size: 62.5%;
@@ -90,10 +90,14 @@ header, main {
 }
 
 .text-gradient {
+    
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-    background-image: linear-gradient( to right,  red, blue, yellow, blue);
+    background-image: linear-gradient( to right,  #FF6651, #6A5AF9, gold);
+
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
 }
 
 footer {
@@ -140,4 +144,8 @@ footer {
         font-size: 1.8rem;
     }
 
+}
+
+ion-icon {
+    pointer-events: none;
 }

@@ -5,20 +5,18 @@
 .task_info_box {
     display: flex;
     flex-wrap: wrap;
-    margin-left: auto;
-    background-color: var(--info);
+    margin: auto;
+    background-color: gold;
     gap: 1px;
-    max-width: 725px;
     width: 100%;
-    width: fit-content;
-    overflow: auto;
     border: 1px solid gold;
+    border-radius: 5px;
 }
 
 .task_field_group {
     flex: 1;
-    min-width: fit-content;
-    padding: 1rem;
+    min-width: 200px;
+    padding: 1rem calc(1rem + .5vw);
     font-size: 14px;
     display: flex;
     flex-direction: column;
@@ -34,9 +32,6 @@
     font-family: sans-serif;
 }
 
-.check_box {
-    margin-top: 1rem;
-}
 
 .second_title {
     color: var(--success);
@@ -44,9 +39,7 @@
 
 .member_list_box {
     font-size: 14px;
-    border-right: 1px solid rgba(0,0,0,.1);
-    padding-top: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
     overflow: auto;
 }
 
@@ -75,7 +68,7 @@
 #btn_enroll {
     font-size: 16px;
     font-weight: bold;
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 .scroll {
@@ -83,18 +76,19 @@
 }
 
 .success_message, .error_message {
-    padding: .5rem;
-    font-size: 14px;
-    font-weight: bold;
-    border-top: 1px solid white;
+    padding: .8rem 1rem;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    border-bottom: 1px solid #2cccff;
 }
 
 .success_message {
     background-color: var(--success);
-    color: white;
+    color: #ffffff;
+    padding: .5rem 1rem;
+    border-radius: 5px;
 }
 
 .error_message {
-    background-color: var(--red);
-    color: white;
+    color: var(--red);
 }

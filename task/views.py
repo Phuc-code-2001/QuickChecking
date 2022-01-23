@@ -1,4 +1,6 @@
+from http.client import OK
 from django.contrib import messages
+from django.http import HttpResponseServerError
 from django.http.response import Http404, HttpResponseBadRequest, HttpResponseNotFound, JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
@@ -71,7 +73,9 @@ def create(request):
 def join(request):
 
     if request.method == 'POST':
+        
         key = request.POST.get('key')
+        if key: key = key.strip()
         item = Task.objects.filter(key=key).first()
         if item:
             response_data = {
@@ -84,7 +88,7 @@ def join(request):
             }
             return JsonResponse(response_data)
         else:
-            return HttpResponseNotFound("No result.")
+            return HttpResponseNotFound()
     
     context = {
         'title': 'Join',
@@ -116,7 +120,7 @@ def detail(request, id):
             return enter_password(request, context)
 
         if task.password != pwd:
-            context['error'] = 'Incorrect password.'
+            context['error'] = 'Incorrect password'
             request.session[f'task_{id}_password'] = None
             return enter_password(request, context)
     else:

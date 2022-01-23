@@ -22,17 +22,21 @@
 
 .item_result {
     font-size: 14px;
-    display: block;
     overflow: auto;
     max-width: 400px;
+    margin: auto;
 }
 
 .item_result table th {
     width: 100px;
 }
 
+.item_result table td {
+    word-wrap: break-word;
+}
+
 .null_result {
-    font-size: 18px;
+    font-size: 14px;
     color: var(--danger);
     text-align: center;
 }

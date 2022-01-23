@@ -36,7 +36,7 @@
         <div class="col-lg-4 col-md-6 search_box __br">
             <form action="" method="POST" autocomplete="off" id="join_form">
                 {% csrf_token %}
-                <input type="search" name="q" placeholder="Enter a key" class="search form-control" value="{{ request.POST.q }}">
+                <input type="search" name="q" placeholder="Enter a key" class="search form-control" value="{{ request.POST.q }}" required>
                 <input type="submit" value="Search" class="btn btn-info search">
             </form>
         </div>
@@ -71,7 +71,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="2" class="text-right">
-                                <a id="item_link" href="" class="btn btn-success">Join Now</a>
+                                <a id="item_link" href="" class="btn btn-success">View Details</a>
                             </td>
                         </tr>
                     </tfoot>

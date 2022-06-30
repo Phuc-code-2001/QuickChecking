@@ -12,12 +12,12 @@ SERVER_TZ = pytz.timezone(settings.TIME_ZONE)
         
 class TaskForm(forms.ModelForm):
 
-    name            = forms.CharField(label="Topic")
-    password        = forms.CharField(max_length=24, widget=forms.PasswordInput())
-    confirm         = forms.CharField(max_length=24, widget=forms.PasswordInput())
-    date_opening    = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    start_time      = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
-    end_time        = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time'}))
+    name            = forms.CharField(label="Topic", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password        = forms.CharField(max_length=24, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    confirm         = forms.CharField(max_length=24, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    date_opening    = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}))
+    start_time      = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}))
+    end_time        = forms.TimeField(widget=forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}))
 
     class Meta:
         model = Task

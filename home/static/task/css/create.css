@@ -4,21 +4,13 @@
     padding: 1rem 0;
 }
 
-.main_task_create {
+label {
+    font-weight: 400;
     font-size: 16px;
-    background-color: white;
-    padding: calc(1.2vw);
-    width: 500px;
-    max-width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border: 1px solid blue;
 }
 
 @media only screen and (max-width: 600px) {
-    .main_task_create {
+    .card {
         background-color: transparent;
         position: static;
         transform: unset;
@@ -51,11 +43,7 @@ p {
     padding: .5rem;
 }
 
-label {
-    font-weight: 600;
-}
-
-.main_task_create input, .main_task_create a {
+.card input, .card a {
     padding: .5rem;
     font-size: 16px !important;
     outline: none;
@@ -65,11 +53,17 @@ label {
 .btn-control {
     margin-top: 1rem;
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn-control > * {
+    font-weight: bold;
 }
 
 
 @media only screen and (max-height: 600px) {
-    .main_task_create input, .main_task_create a {
+    .card input, .card a {
         font-size: 1rem;
         padding: 0 !important;
     }

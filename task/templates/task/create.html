@@ -9,16 +9,22 @@
     <hr>
 </div>
 
-<section class="main_task_create">
+
+
+<section class="d-flex justify-content-center align-items-center">
     
-    <form action="{% url 'task_create' %}" method="post" class="task_form" autocomplete="off">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="btn-control">
-            <a href="{% url 'home' %}" class="btn btn-danger mr-auto">Back</a>
-            <input type="submit" value="Create" class="btn btn-success ml-auto">
+    <div class="card" style="min-width: min(100%, 450px);">
+        <div class="card-body">
+            <form action="{% url 'task_create' %}" method="post" class="task_form" autocomplete="off">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="btn-control">
+                    <input type="submit" value="Create" class="btn btn-primary">
+                    <a href="{% url 'home' %}" class="btn btn-danger">Close</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
     
 </section>
 

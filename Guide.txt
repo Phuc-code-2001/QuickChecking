@@ -1,4 +1,0 @@
-1. Mở cmd ngay tại project này.
-2. Nhập lệnh: env
-3. Nhâp lệnh: start
-4. Mở trình duyệt tại http://127.0.0.1:8000/

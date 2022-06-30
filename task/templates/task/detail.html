@@ -62,7 +62,7 @@
                 <hr>
 
                 {% if item.check_set.all %}
-                <table class="table table-bordered bg-white text-center">
+                <table class="table table-bordered bg-white text-center" id="enrollers-table">
                     <thead class="bg-info text-white">
                         <tr>
                             <th>No.</th>
@@ -115,6 +115,8 @@
             })
 
         });
+
+        // $('#enrollers-table').DataTable();
 
     });
 
